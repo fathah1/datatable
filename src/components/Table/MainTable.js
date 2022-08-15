@@ -52,7 +52,8 @@ function MainTable() {
     setCurrentPurchaseDetails(findObj(value)[0].purchaseDetails);
     console.log("purchase Details in dpd", currentPurchaseDetails);
 
-    RenderPurchaseDetails();
+    RenderPurchaseDetailsHeader();
+    RenderPurchaseDetailsData();
 
     if(innerTableVisiblity){
       setInnerTableVisiblity(false)
@@ -77,17 +78,19 @@ function MainTable() {
         return user.map(item =>{
             return(
 
-              <tbody className="table-striped">
+              <tbody className="table">
               <tr key={item.id}>
-                <td>{item.id}</td> 
-                <td>{item.purchaseNoAuto}</td>
-                <td>{item.phoneNumber}</td>
-                <td>{item.companyId}</td>
-                <td> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
+                <td scope="row">{item.id}</td> 
+                <td scope="row">{item.purchaseNoAuto}</td>
+                <td scope="row">{item.phoneNumber}</td>
+                <td scope="row">{item.companyId}</td>
+                <td scope="row"> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
               </tr>         
 
-           
-               {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetails/> : "" }   
+               
+               {innerTableVisiblity && item.id == currentItemId ? <td colspan="5" > <h6 className="purchaseHeading">Purchase Details</h6> </td> : "" }   
+               {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
+               {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetailsData/> : "" }   
            
           
               </tbody>
@@ -105,40 +108,53 @@ function MainTable() {
       return  obj;
     }
 
-    const RenderPurchaseDetails = () =>{
+    const RenderPurchaseDetailsHeader = () =>{
       console.log("purchaseDetails", currentPurchaseDetails)
      
       return currentPurchaseDetails.map(item =>{
           return(   
-            <tr key={item.id}>
-              <td>{item.purchaseDetailsId}</td> 
-              <td>{item.purchaseId }</td>
-              <td>{item.sno}</td>
-              <td>{item.itemId}</td>
-            </tr>
+            <tr>
+              <th scope="col">Purchase Details Id</th>
+              <th scope="col">Purchase Id</th>
+              <th scope="col">Serial no</th>
+              <th scope="col" colspan="2">Item Id</th>
+           </tr>         
           )
         
       }
       )
   }
 
-
-
-
+  const RenderPurchaseDetailsData = () =>{
+    console.log("purchaseDetails", currentPurchaseDetails)
+   
+    return currentPurchaseDetails.map(item =>{
+        return(   
+          <tr key={item.id}>
+          <td >{item.purchaseDetailsId}</td> 
+          <td>{item.purchaseId }</td>
+          <td>{item.sno}</td>
+          <td colspan="2">{item.itemId}</td>
+          </tr>     
+        )
+      
+    }
+    )
+}
 
 
   return (
     <div className="MainTable">
-       <table className="table table-striped">
+       <table className="table ">
 
   <thead>
 
     <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Purchase Number</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Company Id</th>
-      <th scope="col">Purchase Details</th>
+      <th >Id</th>
+      <th >Purchase Number</th>
+      <th >Phone Number</th>
+      <th >Company Id</th>
+      <th >Purchase Details</th>
     </tr>
 
   </thead>
