@@ -4,6 +4,8 @@ import '../../styles/MainTable.css';
 
 
 
+
+
 function MainTable() {
 
     const [user, setUser] = useState([]); 
@@ -11,8 +13,6 @@ function MainTable() {
     const [currentItemId,SetcurrentItemId] = useState(0);
     const [currentPurchaseDetails, setCurrentPurchaseDetails] = useState([]); 
     const sampleData = require("../Resources/samples.json")
-
-
 
     // useEffect(()=>{
     //     fetch('../resources/data.JSON'
@@ -45,11 +45,6 @@ function MainTable() {
   }, []);
 
 
-
-
-
-
-
   const DisplayPurchaseDetails = ((value)=>{
 
     SetcurrentItemId(value);
@@ -78,31 +73,29 @@ function MainTable() {
     console.log('currentPurchaseDetails', currentPurchaseDetails);
   }, [currentPurchaseDetails])
 
-
-
-   
-
     const renderTableRows = () =>{
         return user.map(item =>{
             return(
-             
+
+              <tbody className="table-striped">
               <tr key={item.id}>
                 <td>{item.id}</td> 
                 <td>{item.purchaseNoAuto}</td>
                 <td>{item.phoneNumber}</td>
                 <td>{item.companyId}</td>
                 <td> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
-              </tr>
+              </tr>         
 
+           
+               {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetails/> : "" }   
+           
+          
+              </tbody>
 
- 
          
-
-     
             )
         })
     }
-
 
     function findObj(value) {
 
@@ -112,11 +105,9 @@ function MainTable() {
       return  obj;
     }
 
-
-   
-
     const RenderPurchaseDetails = () =>{
       console.log("purchaseDetails", currentPurchaseDetails)
+     
       return currentPurchaseDetails.map(item =>{
           return(   
             <tr key={item.id}>
@@ -126,8 +117,13 @@ function MainTable() {
               <td>{item.itemId}</td>
             </tr>
           )
-      })
+        
+      }
+      )
   }
+
+
+
 
 
 
@@ -147,17 +143,14 @@ function MainTable() {
 
   </thead>
 
-    <tbody>
-    {renderTableRows()}
-    {innerTableVisiblity && <RenderPurchaseDetails/>}
-    </tbody>
+  {renderTableRows()}
+
+    
            
  
 </table>
     </div>
   );
-
-
 
 }
 
