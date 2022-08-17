@@ -3,7 +3,7 @@ import MainTable from './MainTable.js'
 
 function Table() {
   return (
-    <div className="Container">
+    <div className="Table">
        <MainTable />
     </div>
   );
