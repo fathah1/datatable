@@ -80,15 +80,19 @@ function MainTable() {
 
               <tbody className="table">
               <tr key={item.id}>
-                <td scope="row">{item.id}</td> 
-                <td scope="row">{item.purchaseNoAuto}</td>
-                <td scope="row">{item.phoneNumber}</td>
-                <td scope="row">{item.companyId}</td>
+                <td scope="row">{item.purchaseNo || "N/A"}</td> 
+                <td scope="row">{item.purchaseDate.slice(0, 10).split("-").reverse().join("-") || "N/A"}</td>
+                <td scope="row">{item.purchasedBy || "N/A"}</td>
+                <td scope="row">{item.ledgerId || "N/A"}</td>
+                <td scope="row">{item.wareHouseId || "N/A"}</td>
+                <td scope="row">{item.purchaseTotal || "N/A"}</td>
+                <td scope="row">{item.balanceAmount || "N/A"}</td>
+                <td scope="row">{item.status || "N/A" }</td>
                 <td scope="row"> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
               </tr>         
 
                
-               {innerTableVisiblity && item.id == currentItemId ? <td colspan="5" > <h6 className="purchaseHeading">Purchase Details</h6> </td> : "" }   
+               {innerTableVisiblity && item.id == currentItemId ? <td colspan="9" > <h6 className="purchaseHeading">Purchase Details</h6> </td> : "" }   
                {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
                {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetailsData/> : "" }   
            
@@ -114,10 +118,10 @@ function MainTable() {
       return currentPurchaseDetails.map(item =>{
           return(   
             <tr>
-              <th scope="col">Purchase Details Id</th>
-              <th scope="col">Purchase Id</th>
-              <th scope="col">Serial no</th>
-              <th scope="col" colspan="2">Item Id</th>
+              <th colspan="3" scope="col">Serial No</th>
+              <th colspan="2" scope="col">Transaction ID</th>
+              <th colspan="2" scope="col">Transaction Type</th>
+              <th colspan="2" scope="col" >Company ID</th>
            </tr>         
           )
         
@@ -130,11 +134,11 @@ function MainTable() {
    
     return currentPurchaseDetails.map(item =>{
         return(   
-          <tr key={item.id}>
-          <td >{item.purchaseDetailsId}</td> 
-          <td>{item.purchaseId }</td>
-          <td>{item.sno}</td>
-          <td colspan="2">{item.itemId}</td>
+          <tr key={item.sno }>
+          <td colspan="3" >{item.purchaseDetailsId || "N/A"}</td> 
+          <td colspan="2">{item.transactionId  || "N/A" }</td>
+          <td colspan="2">{item.transactionType || "N/A"}</td>
+          <td colspan="2">{item.companyId || "N/A"}</td>
           </tr>     
         )
       
@@ -150,11 +154,15 @@ function MainTable() {
   <thead>
 
     <tr>
-      <th >Id</th>
       <th >Purchase Number</th>
-      <th >Phone Number</th>
-      <th >Company Id</th>
-      <th >Purchase Details</th>
+      <th >Purchase Date</th>
+      <th >Purchased By</th>
+      <th >Vendor </th>
+      <th >Warehouse</th>
+      <th >Purchase Amount</th>
+      <th >Balance Amount</th>
+      <th >Status</th>
+      <th> Purchase Details</th>
     </tr>
 
   </thead>
