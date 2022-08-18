@@ -7,7 +7,7 @@ function Logo(props){
     return(
     
     <div className="Logo">
-       <h1 > TradeEasy </h1>
+       <h1 > TE </h1>
     </div>
 
     )

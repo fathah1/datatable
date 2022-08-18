@@ -1,0 +1,88 @@
+.NavBarContainer{
+
+    background-color: #12192c;
+
+    height:100vh;
+    position:sticky;
+    top:0;
+    left:0;
+    color:white;
+    font-family:"Poppins", sans-serif;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.NavBar{
+    display: flex;
+    width:25rem;
+    height:90%;
+    justify-content: flex-start;
+    align-items: start;
+    flex-direction:column;
+    padding:15px;
+    margin:10px;
+}
+
+.lines_icon{
+    display: flex;
+    align-self:flex-end;
+    border-radius: 5px;
+}
+
+.logoContainer{
+    width:20rem;
+    align-items:center;
+    border-radius:5%;
+    margin-bottom:1rem;
+    align-self: center;
+   
+    text-align: center;
+}
+
+.logoText h1{
+    font-size: 14px;
+
+}
+
+.groups{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+.group{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+.item{
+  display: flex;
+  padding:6px 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius:10px;
+  flex-direction:column;
+ 
+}
+
+.icon{
+    margin-right:0.5rem;
+    margin-top: 6px;
+    font-size: 50px;
+}
+
+.MenuIcons{
+    font-size: 24px;
+    margin:15px;
+}
+
+.group{
+    margin-top:25px;
+    font-size:  24px;
+}
+
+.iconContainer{
+    size: 40px;
+}

@@ -4,7 +4,7 @@ import { FaBars } from 'react-icons/fa'
 function Header({toggle}) {
   return (
     <div className="Header">
-       <div onClick={toggle}><FaBars className="icon" /> </div>
+       <div onClick={toggle}></div>
 
        <div className="mid"></div>
 

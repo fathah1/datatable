@@ -9,6 +9,14 @@
 /* styling grids of the components */
 /* other css done in their own files */
 
-.NavBar{
+.NavBarContainer{
     grid-area: nav;   
+}
+
+.iconContainer{
+ font-size: 50px;
+}
+
+.MenuIcons{
+    font-size:20-px;
 }
