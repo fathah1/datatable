@@ -1,9 +1,17 @@
 import '../../styles/Header.css'
+import { FaBars } from 'react-icons/fa'
 
-function Header() {
+function Header({toggle}) {
   return (
     <div className="Header">
-       <h1>Header</h1>
+       <div onClick={toggle}><FaBars className="icon" /> </div>
+
+       <div className="mid"></div>
+
+       <div>
+        <img src="https://icons-for-free.com/iconfiles/png/512/user+icon-1320190636314922883.png" alt="" />
+        <h6>    admin</h6>
+       </div>
     </div>
   );
 }

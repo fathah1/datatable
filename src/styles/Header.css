@@ -1,3 +1,20 @@
 .Header{
-    background-color: blueviolet;
+    display:grid;
+    grid-template-columns: min-content 1fr min-content;
+    height:48px;
+    align-items: stretch;
+    padding: 0 24px ;
+}
+
+img{
+    height:28px;
+}
+
+.icon{
+    font-size: 20px;
+}
+
+.Header div {
+    display: flex;
+    align-items: center;
 }

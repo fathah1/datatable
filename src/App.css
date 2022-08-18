@@ -1,3 +1,14 @@
 .App{
     display:grid;
+    grid-template:"nav header" min-content
+                  "nav main" 1fr/ min-content 1fr;
+    min-height: 100vh;
+}
+
+
+/* styling grids of the components */
+/* other css done in their own files */
+
+.NavBar{
+    grid-area: nav;   
 }
