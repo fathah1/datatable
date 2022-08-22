@@ -1,6 +1,7 @@
 .App{
     display:grid;
     grid-template:"nav header" min-content
+                  "nav filters" min-content
                   "nav main" 1fr/ min-content 1fr;
     min-height: 100vh;
 }
