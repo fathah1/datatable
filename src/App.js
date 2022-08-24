@@ -12,11 +12,15 @@ function App() {
     setShowNav(!showNav);
   } 
 
+  const filterChangeHandler = (data) =>{
+    console.log("filter has been changed", data)
+  }
+
   return (
     <div className="App">
        <NavBar visible={showNav}/>
        <Header toggle={toggle}/>
-       <Filters />
+       <Filters onFilterChange={filterChangeHandler}/>
        <Table />
     </div>
   );

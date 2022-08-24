@@ -6,7 +6,7 @@ import '../../styles/MainTable.css';
 
 
 
-function MainTable() {
+function MainTable(props) {
 
     const [user, setUser] = useState([]); 
     const [innerTableVisiblity,setInnerTableVisiblity] = useState(false);
@@ -41,7 +41,6 @@ function MainTable() {
 
   useEffect(() => {
     setUser(sampleData);
-    console.log(sampleData);
   }, []);
 
 
@@ -66,13 +65,6 @@ function MainTable() {
   })
 
    
-  useEffect(() => {
-    console.log('currentItemId', currentItemId);
-  }, [currentItemId])
-
-  useEffect(() => {
-    console.log('currentPurchaseDetails', currentPurchaseDetails);
-  }, [currentPurchaseDetails])
 
     const renderTableRows = () =>{
         return user.map(item =>{
@@ -80,21 +72,21 @@ function MainTable() {
 
               <tbody className="table">
               <tr key={item.id}>
-                <td scope="row">{item.purchaseNo || "N/A"}</td> 
-                <td scope="row">{item.purchaseDate.slice(0, 10).split("-").reverse().join("-") || "N/A"}</td>
-                <td scope="row">{item.purchasedBy || "N/A"}</td>
-                <td scope="row">{item.ledgerId || "N/A"}</td>
-                <td scope="row">{item.wareHouseId || "N/A"}</td>
-                <td scope="row">{item.purchaseTotal || "N/A"}</td>
-                <td scope="row">{item.balanceAmount || "N/A"}</td>
-                <td scope="row">{item.status || "N/A" }</td>
-                <td scope="row"> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
+                <td>{item.purchaseNo || "N/A"}</td> 
+                <td>{item.purchaseDate.slice(0, 10).split("-").reverse().join("-") || "N/A"}</td>
+                <td>{item.purchasedBy || "N/A"}</td>
+                <td>{item.ledgerId || "N/A"}</td>
+                <td>{item.wareHouseId || "N/A"}</td>
+                <td>{item.purchaseTotal || "N/A"}</td>
+                <td>{item.balanceAmount || "N/A"}</td>
+                <td>{item.status || "N/A" }</td>
+                <td> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
               </tr>         
 
                
-               {innerTableVisiblity && item.id == currentItemId ? <td colspan="9" > <h6 className="purchaseHeading">Purchase Details</h6> </td> : "" }   
-               {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
-               {innerTableVisiblity && item.id == currentItemId ? <RenderPurchaseDetailsData/> : "" }   
+               {innerTableVisiblity && item.id === currentItemId ? <td colSpan="9" > <h6 className="purchaseHeading">Purchase Details</h6> </td> : "" }   
+               {innerTableVisiblity && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
+               {innerTableVisiblity && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
            
           
               </tbody>
@@ -113,15 +105,14 @@ function MainTable() {
     }
 
     const RenderPurchaseDetailsHeader = () =>{
-      console.log("purchaseDetails", currentPurchaseDetails)
      
       return currentPurchaseDetails.map(item =>{
           return(   
-            <tr>
-              <th colspan="3" scope="col">Serial No</th>
-              <th colspan="2" scope="col">Transaction ID</th>
-              <th colspan="2" scope="col">Transaction Type</th>
-              <th colspan="2" scope="col" >Company ID</th>
+            <tr key = {item.purchaseDetailsId}>
+              <th colSpan="3" scope="col">Serial No</th>
+              <th colSpan="2" scope="col">Transaction ID</th>
+              <th colSpan="2" scope="col">Transaction Type</th>
+              <th colSpan="2" scope="col" >Company ID</th>
            </tr>         
           )
         
@@ -130,15 +121,15 @@ function MainTable() {
   }
 
   const RenderPurchaseDetailsData = () =>{
-    console.log("purchaseDetails", currentPurchaseDetails)
+    
    
     return currentPurchaseDetails.map(item =>{
         return(   
           <tr key={item.sno }>
-          <td colspan="3" >{item.purchaseDetailsId || "N/A"}</td> 
-          <td colspan="2">{item.transactionId  || "N/A" }</td>
-          <td colspan="2">{item.transactionType || "N/A"}</td>
-          <td colspan="2">{item.companyId || "N/A"}</td>
+          <td colSpan="3" >{item.purchaseDetailsId || "N/A"}</td> 
+          <td colSpan="2">{item.transactionId  || "N/A" }</td>
+          <td colSpan="2">{item.transactionType || "N/A"}</td>
+          <td colSpan="2">{item.companyId || "N/A"}</td>
           </tr>     
         )
       

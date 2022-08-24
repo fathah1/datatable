@@ -9,7 +9,7 @@ import {useState} from 'react';
 
 function NavBar(props) {
 
-  const [open,setOpen] = useState(true);
+  const [open,setOpen] = useState(false);
 
   const handleToggle = () =>{
     setOpen(!open)
@@ -37,18 +37,18 @@ function NavBar(props) {
     },
   };
 
-  const profileVariants = {
-    true: {
-      alignSelf: "center",
-      width: "4rem",
-    },
-    false: {
-      content:'TE',
-      alignSelf: "flex-start",
-      marginTop: "2rem",
-      width: "3rem",
-    },
-  };
+  // const profileVariants = {
+  //   true: {
+  //     alignSelf: "center",
+  //     width: "4rem",
+  //   },
+  //   false: {
+  //     content:'TE',
+  //     alignSelf: "flex-start",
+  //     marginTop: "2rem",
+  //     width: "3rem",
+  //   },
+  // };
 
   return (
     <motion.div 
