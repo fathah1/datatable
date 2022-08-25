@@ -12,7 +12,8 @@ function MainTable(props) {
     const [innerTableVisiblity,setInnerTableVisiblity] = useState(false);
     const [currentItemId,SetcurrentItemId] = useState(0);
     const [currentPurchaseDetails, setCurrentPurchaseDetails] = useState([]); 
-    const sampleData = require("../Resources/samples.json")
+    const sampleData = require("../Resources/samples.json");
+    const [filteredData,setFilteredData] = useState([]);
 
     // useEffect(()=>{
     //     fetch('../resources/data.JSON'
@@ -39,9 +40,48 @@ function MainTable(props) {
     // },[])
 
 
+
+
+
   useEffect(() => {
     setUser(sampleData);
   }, []);
+
+  useEffect(() => {
+    setFilteredData(user);
+  }, [user]);
+
+
+
+
+
+
+  // filter handlers
+  const minBalanceFilterHandler = () => {
+    const minBalance = props.minBalanceFilter;
+
+    if (minBalance !== '' )  {
+      const results =user.filter((thisuser) => {
+        return thisuser.balanceAmount > minBalance;
+      });
+      console.log("inside Filter handler",results);
+      setFilteredData(results);
+
+    } else {
+      setFilteredData(sampleData);
+      console.log("inside Filter handler else",sampleData);
+      console.log("inside Filter else",typeof minBalance, minBalance);
+    }
+  };
+
+
+  //filter Calls 
+  useEffect(()=>{
+    minBalanceFilterHandler(props.minBalanceFilter);
+    console.log("minBalanceFilter in main table",typeof props.minBalanceFilter);
+  },[props.minBalanceFilter]);
+
+
 
 
   const DisplayPurchaseDetails = ((value)=>{
@@ -67,7 +107,7 @@ function MainTable(props) {
    
 
     const renderTableRows = () =>{
-        return user.map(item =>{
+        return filteredData.map(item =>{
             return(
 
               <tbody className="table">
@@ -126,10 +166,10 @@ function MainTable(props) {
     return currentPurchaseDetails.map(item =>{
         return(   
           <tr key={item.sno }>
-          <td colSpan="3" >{item.purchaseDetailsId || "N/A"}</td> 
-          <td colSpan="2">{item.transactionId  || "N/A" }</td>
-          <td colSpan="2">{item.transactionType || "N/A"}</td>
-          <td colSpan="2">{item.companyId || "N/A"}</td>
+          <th colSpan="3" >{item.purchaseDetailsId || "N/A"}</th> 
+          <th colSpan="2">{item.transactionId  || "N/A" }</th>
+          <th colSpan="2">{item.transactionType || "N/A"}</th>
+          <th colSpan="2">{item.companyId || "N/A"}</th>
           </tr>     
         )
       

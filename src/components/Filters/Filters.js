@@ -8,17 +8,36 @@ const Filters = (props) =>{
     props.onFilterChange(events.target.value);
 
   }
-
-
   
   return (
     <div className="FiltersContainer">
-        <h3>Purchase Report</h3>
+        <h3 className="text-center">Purchase Report</h3>
 
         <div className="filters">
-            <h4>filters: </h4>
-            <input onChange={onChangeHandler} type="text" placeholder="min purchase amount"/>
-        </div>
+            <h4 className="filterComponents">Filters: </h4>
+
+       
+            <h5 className="filterComponents headings">Min Purchase Amount:</h5>
+            <input 
+            onChange={onChangeHandler}
+            type="number" 
+            placeholder="min purchase amount"
+            className="filterComponents"/>
+
+            <h5 className="filterComponents headings">Min Purchase Amount:</h5>
+            <input 
+            onChange={onChangeHandler}
+            type="number" 
+            placeholder="min purchase amount"
+            className="filterComponents"/>
+
+            <h5 className="filterComponents headings">Min Purchase Amount:</h5>
+            <input 
+            onChange={onChangeHandler}
+            type="number" 
+            placeholder="min purchase amount"
+            className="filterComponents"/>
+            </div>
 
     </div>
   );
