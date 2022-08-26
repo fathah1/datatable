@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IoIosArrowDropdown} from "react-icons/io";
 import '../../styles/MainTable.css';
-
+import {motion} from 'framer-motion';
 
 
 
@@ -14,6 +14,7 @@ function MainTable(props) {
     const [currentPurchaseDetails, setCurrentPurchaseDetails] = useState([]); 
     const sampleData = require("../Resources/samples.json");
     const [filteredData,setFilteredData] = useState([]);
+
 
     // useEffect(()=>{
     //     fetch('../resources/data.JSON'
@@ -54,6 +55,20 @@ function MainTable(props) {
 
 
 
+  //animation motion Handlers
+  const DropButtonVariants = {
+    true: {width: "25rem"},
+    false: {
+      width: "5rem",
+      transition: {
+        delay: 0.2,
+      },
+    },
+  };
+
+
+
+
 
 
   // filter handlers
@@ -64,22 +79,38 @@ function MainTable(props) {
       const results =user.filter((thisuser) => {
         return thisuser.balanceAmount > minBalance;
       });
-      console.log("inside Filter handler",results);
       setFilteredData(results);
 
     } else {
       setFilteredData(sampleData);
-      console.log("inside Filter handler else",sampleData);
-      console.log("inside Filter else",typeof minBalance, minBalance);
     }
   };
+
+
+
+  const VendorFilterHandler = () => {
+    const vendor = props.vendorFilter;
+    if (vendor !== '' )  {
+      const results =user.filter((thisuser) => {
+        return thisuser.ledgerId==vendor;
+      });
+      setFilteredData(results);
+
+    } else {
+      setFilteredData(sampleData);
+    }
+  };
+
 
 
   //filter Calls 
   useEffect(()=>{
     minBalanceFilterHandler(props.minBalanceFilter);
-    console.log("minBalanceFilter in main table",typeof props.minBalanceFilter);
   },[props.minBalanceFilter]);
+
+  useEffect(()=>{
+    VendorFilterHandler(props.vendorFilter);
+  },[props.vendorFilter]);
 
 
 
@@ -120,14 +151,26 @@ function MainTable(props) {
                 <td>{item.purchaseTotal || "N/A"}</td>
                 <td>{item.balanceAmount || "N/A"}</td>
                 <td>{item.status || "N/A" }</td>
-                <td> <button onClick={() => {DisplayPurchaseDetails(item.id);}} > <IoIosArrowDropdown  />  </button></td>
+                <td> 
+                  <motion.button 
+                  className="btn "
+                  onClick={() => {DisplayPurchaseDetails(item.id);}} 
+                  > <IoIosArrowDropdown  />
+                    </motion.button>
+                </td>
               </tr>         
 
-               
-               {innerTableVisiblity && item.id === currentItemId ? <td colSpan="9" > <h6 className="purchaseHeading">Purchase Details</h6> </td> : "" }   
+           
+               {innerTableVisiblity && item.id === currentItemId ? <motion.th colSpan="9" 
+               initial={{y: -10}}
+               animate={{y:0}}
+           
+               >
+               <h6 className="purchaseHeading">Purchase Details</h6>
+               </motion.th> : "" }   
                {innerTableVisiblity && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
                {innerTableVisiblity && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
-           
+        
           
               </tbody>
 
@@ -148,12 +191,16 @@ function MainTable(props) {
      
       return currentPurchaseDetails.map(item =>{
           return(   
-            <tr key = {item.purchaseDetailsId}>
+            <motion.tr
+            colSpan="9"
+            initial={{y: -10}}
+            animate={{y:0}}
+            key = {item.purchaseDetailsId}>
               <th colSpan="3" scope="col">Serial No</th>
               <th colSpan="2" scope="col">Transaction ID</th>
               <th colSpan="2" scope="col">Transaction Type</th>
               <th colSpan="2" scope="col" >Company ID</th>
-           </tr>         
+           </motion.tr>         
           )
         
       }
@@ -165,12 +212,16 @@ function MainTable(props) {
    
     return currentPurchaseDetails.map(item =>{
         return(   
-          <tr key={item.sno }>
-          <th colSpan="3" >{item.purchaseDetailsId || "N/A"}</th> 
-          <th colSpan="2">{item.transactionId  || "N/A" }</th>
-          <th colSpan="2">{item.transactionType || "N/A"}</th>
-          <th colSpan="2">{item.companyId || "N/A"}</th>
-          </tr>     
+          <motion.tr
+          initial={{y: -10}}
+          animate={{y:0}}
+        
+          key={item.sno }>
+          <td colSpan="3" >{item.purchaseDetailsId || "N/A"}</td> 
+          <td colSpan="2">{item.transactionId  || "N/A" }</td>
+          <td colSpan="2">{item.transactionType || "N/A"}</td>
+          <td colSpan="2">{item.companyId || "N/A"}</td>
+          </motion.tr>     
         )
       
     }

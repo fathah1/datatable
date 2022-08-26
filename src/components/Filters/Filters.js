@@ -3,9 +3,13 @@ import '../../styles/Filters.css'
 
 const Filters = (props) =>{
 
-  const onChangeHandler = (events) =>{
-    console.log("filter.js handler", events.target.value);
-    props.onFilterChange(events.target.value);
+  const onMinBalanceChangeHandler = (events) =>{
+    props.onMinBalanceFilterChange(events.target.value);
+
+  }
+
+  const onVendorChangeHandler = (events) =>{
+    props.onVendorChange(events.target.value);
 
   }
   
@@ -16,27 +20,22 @@ const Filters = (props) =>{
         <div className="filters">
             <h4 className="filterComponents">Filters: </h4>
 
-       
+            <div className="filterComponentsContainer">
             <h5 className="filterComponents headings">Min Purchase Amount:</h5>
             <input 
-            onChange={onChangeHandler}
+            onChange={onMinBalanceChangeHandler}
             type="number" 
             placeholder="min purchase amount"
             className="filterComponents"/>
 
-            <h5 className="filterComponents headings">Min Purchase Amount:</h5>
-            <input 
-            onChange={onChangeHandler}
-            type="number" 
-            placeholder="min purchase amount"
-            className="filterComponents"/>
 
-            <h5 className="filterComponents headings">Min Purchase Amount:</h5>
+            <h5 className="filterComponents headings">Vendor Id:</h5>
             <input 
-            onChange={onChangeHandler}
+            onChange={onVendorChangeHandler}
             type="number" 
-            placeholder="min purchase amount"
+            placeholder="enter vendor Id"
             className="filterComponents"/>
+            </div>
             </div>
 
     </div>

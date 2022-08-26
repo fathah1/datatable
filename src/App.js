@@ -12,18 +12,24 @@ function App() {
   } 
 
   const [filterMinBalance,setFilterMinBalance]=useState();  
+  const [filterVendor,setFilterVendor]=useState();  
 
-  const filterChangeHandler = (data) =>{
-    console.log("filter has been changed", data)
+
+  const minBalanceFilterChangeHandler = (data) =>{
     setFilterMinBalance(data);
   }
+
+  const VendorFilterChangeHandler = (data) =>{
+    setFilterVendor(data);
+  }
+
 
   return (
     <div className="App">
        <NavBar visible={showNav}/>
        <Header toggle={toggle}/>
-       <Filters onFilterChange={filterChangeHandler}/>
-       <MainTable minBalanceFilter={filterMinBalance} />
+       <Filters onMinBalanceFilterChange={minBalanceFilterChangeHandler} onVendorChange={VendorFilterChangeHandler}/>
+       <MainTable minBalanceFilter={filterMinBalance} vendorFilter ={filterVendor}/>
     </div>
   );
 }
