@@ -9,7 +9,7 @@ img{
 }
 
 
-.Header div {
+.headerComponents {
     display: flex;
     align-items: center;
     margin-left: 80%;
@@ -17,3 +17,31 @@ img{
     justify-content: right;
 }
 
+.userMenuDetails{
+    position:absolute;
+    width:300px;
+    right:0;
+    text-align:center;
+    border-radius: 0;
+
+}
+
+.menuDetails{
+    font-size:1.5rem;
+}
+
+
+/* .userMenuDetails{
+    z-index:100;
+    position:relative;
+    top:0.1rem;
+    margin-left:80%;
+    margin-right:5%;
+    background-color: rgba(136, 136, 174, 0.245);
+    width: max-content;
+    text-align: center;
+    padding:1rem;
+    clip-path: polygon(0 100%, 100% 100%, 100% 16%, 81% 16%, 71% 0, 62% 16%, 0 17%);
+
+
+} */

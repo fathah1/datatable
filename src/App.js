@@ -9,11 +9,14 @@ function App() {
   const [filterMinBalance,setFilterMinBalance]=useState();  
   const [filterVendor,setFilterVendor]=useState();  
 
+  //Change to Dynamic from API data
   const userDetails={
+    image:"https://icons-for-free.com/iconfiles/png/512/user+icon-1320190636314922883.png",
     name:'john doe',
-    email:'jogndoe@gmail.com'
+    email:'johndoe@gmail.com'
   }
 
+  
   const minBalanceFilterChangeHandler = (data) =>{
     setFilterMinBalance(data);
   }

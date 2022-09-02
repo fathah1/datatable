@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IoIosArrowDropdown, IoIosArrowDropup} from "react-icons/io";
 import '../../styles/MainTable.css';
-import {motion} from 'framer-motion';
+import {motion, AnimatePresence} from 'framer-motion';
 
 
 
@@ -46,7 +46,7 @@ function MainTable(props) {
 
   useEffect(() => {
     setUser(sampleData);
-  }, []);
+  },[sampleData]);
 
   useEffect(() => {
     setFilteredData(user);
@@ -72,6 +72,7 @@ function MainTable(props) {
     } else {
       setFilteredData(sampleData);
     }
+
   };
 
 
@@ -80,7 +81,7 @@ function MainTable(props) {
     const vendor = props.vendorFilter;
     if (vendor !== '' )  {
       const results =user.filter((thisuser) => {
-        return thisuser.ledgerId==vendor;
+        return thisuser.ledgerId === vendor;
       });
       setFilteredData(results);
 
@@ -149,7 +150,7 @@ function MainTable(props) {
                 </td>
               </tr>         
 
-           
+                
                {innerTableVisibility && item.id === currentItemId ? <motion.th colSpan="9" 
                initial={{y: -10}}
                animate={{y:0}}ß
@@ -177,22 +178,17 @@ function MainTable(props) {
 
     const RenderPurchaseDetailsHeader = () =>{
      
-      return currentPurchaseDetails.map(item =>{
           return(   
             <motion.tr
             colSpan="9"
             initial={{y: -10}}
-            animate={{y:0}}
-            key = {item.purchaseDetailsId}>
+            animate={{y:0}}>
               <th colSpan="3" scope="col">Serial No</th>
               <th colSpan="2" scope="col">Transaction ID</th>
               <th colSpan="2" scope="col">Transaction Type</th>
               <th colSpan="2" scope="col" >Company ID</th>
            </motion.tr>         
           )
-        
-      }
-      )
   }
 
   const RenderPurchaseDetailsData = () =>{
@@ -216,9 +212,11 @@ function MainTable(props) {
 }
 
 
+
+
   return (
     <div className="MainTable">
-       <table className="table ">
+       <table className="table">
 
   <thead>
 
