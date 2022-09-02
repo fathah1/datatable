@@ -12,6 +12,7 @@
 ## Things to fix
 * using multiple filters at once 
 * starts with equivalent for filters for smoother search
-*figure out how to make purchase details elements as one element
+* figure out how to make purchase details elements as one element
+* fix objects with ledgerID not rendring first and later rendering or refresh or adding deleting filter
 
 

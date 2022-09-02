@@ -1,11 +1,13 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import '../../styles/items.css'
 
 function Item({icon,name}) {
 
 const subHeading = {
     true:{
-        opacity:1
+        opacity:1,
+        display:'initial'
     },
     false:{
         opacity:0,
@@ -25,7 +27,7 @@ const subHeading = {
     }}
     
     className='item'>
-        <motion.div className="iconContainer">
+        <motion.div className="itemIcon">
             {icon}
         </motion.div>
         <motion.span variants={subHeading}>

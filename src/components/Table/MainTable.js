@@ -164,6 +164,7 @@ function MainTable(props) {
                {innerTableVisiblity && item.id === currentItemId ? <motion.th colSpan="9" 
                initial={{y: -10}}
                animate={{y:0}}
+               exit={{opacity:0,y:"-50%",transition:{duration:"0.35"}}}
            
                >
                <h6 className="purchaseHeading">Purchase Details</h6>
@@ -215,7 +216,6 @@ function MainTable(props) {
           <motion.tr
           initial={{y: -10}}
           animate={{y:0}}
-        
           key={item.sno }>
           <td colSpan="3" >{item.purchaseDetailsId || "N/A"}</td> 
           <td colSpan="2">{item.transactionId  || "N/A" }</td>

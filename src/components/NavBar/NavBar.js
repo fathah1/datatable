@@ -1,13 +1,12 @@
 import '../../styles/NavBar.css'
 import {TocRounded ,DashboardRounded, AttachMoneyRounded} from '@material-ui/icons'
-import Logo from "./Logo.js"
 import Item from './Item.js'
 import {motion} from 'framer-motion'
 import {useState} from 'react';
 
 
 
-function NavBar(props) {
+function NavBar() {
 
   const [open,setOpen] = useState(false);
 
@@ -17,7 +16,7 @@ function NavBar(props) {
 
   const sideContainerVariants = {
     true: {
-      width: "30rem"
+      width: "30rem",
     },
     false: {
       width:"7rem",
@@ -28,47 +27,80 @@ function NavBar(props) {
   };
 
   const sidebarVariants = {
-    true: {width: "25rem"},
+    true: {width: "30rem"},
     false: {
-      width: "5rem",
+      width: "7rem",
       transition: {
         delay: 0.2,
       },
     },
   };
 
-  // const profileVariants = {
-  //   true: {
-  //     alignSelf: "center",
-  //     width: "4rem",
-  //   },
-  //   false: {
-  //     content:'TE',
-  //     alignSelf: "flex-start",
-  //     marginTop: "2rem",
-  //     width: "3rem",
-  //   },
-  // };
+
+  const linesIconVariants = {
+    true: {marginLeft: "80%"},
+    false: {
+      marginLeft:"25%",
+      transition: {
+        delay: 0.2,
+      },
+    },
+  };
+
+  const smalllogoVariants = {
+    true: {
+            display:'none',
+            opacity:0
+          },
+    false: {
+      display:'initial',
+      opacity:1,
+      transition: {
+        delay: 0.1,
+      },
+    },
+  };
+
+  const biglogoVariants = {
+    true: {
+            display:'initial',
+            opacity:1
+          },
+    false: {
+      display:'none',
+      opacity:0,
+      transition: {
+        delay: 0.1,
+      },
+    },
+  };
+
+
 
   return (
     <motion.div 
-    data-Open = {open}
     variants = {sideContainerVariants}
     initial={`${open}`}
     animate={`${open}`}
     className="NavBarContainer">
       
       <motion.div 
-      data-Open = {open}
+
       variants={sidebarVariants}
       initial={`${open}`}
       animate={`${open}`}
       
       className="NavBar">
 
-
-
-        <motion.div whileHover={{
+        {/* lines_icon */}
+        <motion.div className="buttonContainer"
+        variants={linesIconVariants}
+        initial={`${open}`}
+        animate={`${open}`}
+        >
+          
+        <motion.div
+         whileHover={{
           scale:1.2,
           rotate:180,
           backgroundColor:"rgba(255,255,255,0.3)",
@@ -81,18 +113,37 @@ function NavBar(props) {
         }} 
         onClick={handleToggle}
         className="lines_icon">
+          
+          <TocRounded/>
 
-
-          <TocRounded className="Lines"/>
         </motion.div>
+
+        </motion.div>
+
+        
+
+
          <div className="logoContainer">
-           <Logo className="logoText"/>
+            <motion.h3
+            variants={smalllogoVariants}
+             className="Logo"
+             initial={`${open}`}
+             animate={`${open}`}
+            
+             > TE </motion.h3>
+              <motion.h3
+            variants={biglogoVariants}
+             className="Logo"
+             initial={`${open}`}
+             animate={`${open}`}
+            
+             > Trade Easy </motion.h3>
          </div>
 
          <div className="groups">
            <div className="group">
-            <Item className="MenuIcons"  icon={<DashboardRounded size="3rem"/>} name='Dashboard' />
-            <Item className="MenuIcons" icon={<AttachMoneyRounded/>} name='Sales' />
+             <Item icon={<DashboardRounded/>} name='Dashboard' />
+             <Item icon={<AttachMoneyRounded/>} name='Sales' />
            </div>
          </div>
 
