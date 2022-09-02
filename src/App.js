@@ -9,11 +9,14 @@ function App() {
   const [filterMinBalance,setFilterMinBalance]=useState();  
   const [filterVendor,setFilterVendor]=useState();  
 
+  const userDetails={
+    name:'john doe',
+    email:'jogndoe@gmail.com'
+  }
 
   const minBalanceFilterChangeHandler = (data) =>{
     setFilterMinBalance(data);
   }
-
   const VendorFilterChangeHandler = (data) =>{
     setFilterVendor(data);
   }
@@ -22,7 +25,7 @@ function App() {
   return (
     <div className="App">
        <NavBar/>
-       <Header/>
+       <Header  user={userDetails}/>
        <Filters onMinBalanceFilterChange={minBalanceFilterChangeHandler} onVendorChange={VendorFilterChangeHandler}/>
        <MainTable minBalanceFilter={filterMinBalance} vendorFilter ={filterVendor}/>
     </div>

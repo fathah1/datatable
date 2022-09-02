@@ -76,6 +76,8 @@ function NavBar() {
   };
 
 
+  
+
 
   return (
     <motion.div 
@@ -112,9 +114,11 @@ function NavBar() {
           }
         }} 
         onClick={handleToggle}
-        className="lines_icon">
+        className="lines_icon"
+        labelStyle={{ fontSize: '300%' }}
+        >
           
-          <TocRounded/>
+          <TocRounded className= "allIcons"/>
 
         </motion.div>
 
@@ -142,8 +146,8 @@ function NavBar() {
 
          <div className="groups">
            <div className="group">
-             <Item icon={<DashboardRounded/>} name='Dashboard' />
-             <Item icon={<AttachMoneyRounded/>} name='Sales' />
+             <Item icon={<DashboardRounded className= "allIcons"/>} name='Dashboard' />
+             <Item icon={<AttachMoneyRounded className= "allIcons"/>} name='Sales' />
            </div>
          </div>
 

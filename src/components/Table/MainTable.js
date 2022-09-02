@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IoIosArrowDropdown} from "react-icons/io";
+import { IoIosArrowDropdown, IoIosArrowDropup} from "react-icons/io";
 import '../../styles/MainTable.css';
 import {motion} from 'framer-motion';
 
@@ -9,7 +9,7 @@ import {motion} from 'framer-motion';
 function MainTable(props) {
 
     const [user, setUser] = useState([]); 
-    const [innerTableVisiblity,setInnerTableVisiblity] = useState(false);
+    const [innerTableVisibility,setinnerTableVisibility] = useState(false);
     const [currentItemId,SetcurrentItemId] = useState(0);
     const [currentPurchaseDetails, setCurrentPurchaseDetails] = useState([]); 
     const sampleData = require("../Resources/samples.json");
@@ -53,18 +53,6 @@ function MainTable(props) {
   }, [user]);
 
 
-
-
-  //animation motion Handlers
-  const DropButtonVariants = {
-    true: {width: "25rem"},
-    false: {
-      width: "5rem",
-      transition: {
-        delay: 0.2,
-      },
-    },
-  };
 
 
 
@@ -125,10 +113,10 @@ function MainTable(props) {
     RenderPurchaseDetailsHeader();
     RenderPurchaseDetailsData();
 
-    if(innerTableVisiblity){
-      setInnerTableVisiblity(false)
+    if(innerTableVisibility){
+      setinnerTableVisibility(false)
     }else{
-      setInnerTableVisiblity(true)
+      setinnerTableVisibility(true)
     }
 
    
@@ -152,25 +140,24 @@ function MainTable(props) {
                 <td>{item.balanceAmount || "N/A"}</td>
                 <td>{item.status || "N/A" }</td>
                 <td> 
-                  <motion.button 
-                  className="btn "
-                  onClick={() => {DisplayPurchaseDetails(item.id);}} 
-                  > <IoIosArrowDropdown  />
-                    </motion.button>
+                  <button 
+                  className = "btn "   
+                  onClick = {() => {DisplayPurchaseDetails(item.id);}} 
+                  > 
+                  {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
+                    </button>
                 </td>
               </tr>         
 
            
-               {innerTableVisiblity && item.id === currentItemId ? <motion.th colSpan="9" 
+               {innerTableVisibility && item.id === currentItemId ? <motion.th colSpan="9" 
                initial={{y: -10}}
-               animate={{y:0}}
-               exit={{opacity:0,y:"-50%",transition:{duration:"0.35"}}}
-           
+               animate={{y:0}}ß
                >
                <h6 className="purchaseHeading">Purchase Details</h6>
                </motion.th> : "" }   
-               {innerTableVisiblity && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
-               {innerTableVisiblity && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
+               {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
+               {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
         
           
               </tbody>

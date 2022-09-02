@@ -1,6 +1,7 @@
 import '../../styles/Header.css'
+import UserMenu from './UserMenu'
 
-function Header({props}) {
+function Header({user}) {
   return (
     <div className="Header">
 

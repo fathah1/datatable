@@ -10,3 +10,7 @@
 /* styling grids of the components */
 /* other css done in their own files */
 
+
+.MuiSvgIcon-root {
+    font-size:2.7rem;
+  }

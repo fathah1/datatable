@@ -93,3 +93,7 @@
     flex-direction: column;
     width: 100%
   }
+
+.allIcons{
+    font-size: 2.5rem !important;
+}
