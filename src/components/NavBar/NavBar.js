@@ -115,7 +115,7 @@ function NavBar() {
         }} 
         onClick={handleToggle}
         className="lines_icon"
-        labelStyle={{ fontSize: '300%' }}
+        labelstyle={{ fontSize: '300%' }}
         >
           
           <TocRounded className= "allIcons"/>

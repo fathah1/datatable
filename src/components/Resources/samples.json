@@ -83,8 +83,9 @@
                 "updateDate": "0001-01-01T00:00:00Z"
             }
         ],
-        "serialNoDetails": [],
-        "wareHouseStockDetails": []
+        "serialNoDetails": [{"serialNo" : "223444", "transactionId":"1231231", "transactionType":"purchase", "companyId" : "1341234gf11983"},
+                            {"serialNo" : "55667788", "transactionId":"1456835", "transactionType":"purchase", "companyId" : "74231bsd83"}],
+        "wareHouseStockDetails": [{"warehouseName" : "test 2", "qty":"1", "warehouseId":"14123kasfa323412","location":"Dubai"}]
     },
     {
         "id": "62f79e2cf83a8bbd295a92bf",
@@ -522,7 +523,7 @@
         "wareHouseStockDetails": []
     },
     {
-        "id": "62f7a4dff83a8bbd295a92cb",
+        "id": "62f7a4dff83a8bbd295a92cb98",
         "purchaseNoAuto": 7,
         "purchaseNo": "A7",
         "invoiceNo": "",
@@ -767,7 +768,7 @@
         "wareHouseStockDetails": []
     },
     {
-        "id": "62f7ce73634ea6471c980a6f",
+        "id": "62f7ce73634ea6471c980a6f12",
         "purchaseNoAuto": 9,
         "purchaseNo": "A9",
         "invoiceNo": "",
@@ -932,7 +933,7 @@
         "wareHouseStockDetails": []
     },
     {
-        "id": "62f7cf2dbe00450e3556d12f",
+        "id": "62f7cf2dbe00450e3556d12f513",
         "purchaseNoAuto": 10,
         "purchaseNo": "A10",
         "invoiceNo": "",
@@ -1192,7 +1193,7 @@
         "wareHouseStockDetails": []
     },
     {
-        "id": "62f7d0e42f3a11e24b0c8b47",
+        "id": "62f7d0e42f3a11e24b0c8b47123512",
         "purchaseNoAuto": 12,
         "purchaseNo": "A12",
         "invoiceNo": "",
@@ -1336,7 +1337,7 @@
         "wareHouseStockDetails": []
     },
     {
-        "id": "62f7d182d90ee71674f4d1df",
+        "id": "62f7d182d90ee71674f4d1d835f",
         "purchaseNoAuto": 13,
         "purchaseNo": "A13",
         "invoiceNo": "",

@@ -13,3 +13,12 @@
     width: 100%;
     padding-left:19rem;
 }
+
+th{
+    /* height: 6rem !important; */
+    text-align: center !important;
+}
+
+tr{
+    text-align: center;
+}
