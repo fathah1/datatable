@@ -131,7 +131,7 @@ function MainTable(props) {
             return(
 
               <tbody className="table">
-              <tr key={item.id}>
+              <tr key={item.id} >
                 <td>{item.purchaseNo || "N/A"}</td> 
                 <td>{item.purchaseDate.slice(0, 10).split("-").reverse().join("-") || "N/A"}</td>
                 <td>{item.purchasedBy || "N/A"}</td>
@@ -140,7 +140,7 @@ function MainTable(props) {
                 <td>{item.purchaseTotal || "N/A"}</td>
                 <td>{item.balanceAmount || "N/A"}</td>
                 <td>{item.status || "N/A" }</td>
-                <td> 
+                <td className=""> 
                   <button 
                   className = "btn "   
                   onClick = {() => {DisplayPurchaseDetails(item.id);}} 
@@ -151,12 +151,12 @@ function MainTable(props) {
               </tr>         
 
                 
-               {innerTableVisibility && item.id === currentItemId ? <motion.th colSpan="9" 
+               {innerTableVisibility && item.id === currentItemId ? <motion.td colSpan="9" 
                initial={{y: -10}}
-               animate={{y:0}}ß
+               animate={{y:0}}
                >
                <h6 className="purchaseHeading">Purchase Details</h6>
-               </motion.th> : "" }   
+               </motion.td> : "" }   
                {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
                {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
         
@@ -183,10 +183,11 @@ function MainTable(props) {
             colSpan="9"
             initial={{y: -10}}
             animate={{y:0}}>
-              <th colSpan="3" scope="col">Serial No</th>
+              <th colSpan="2" scope="col">Serial No</th>
               <th colSpan="2" scope="col">Transaction ID</th>
               <th colSpan="2" scope="col">Transaction Type</th>
               <th colSpan="2" scope="col" >Company ID</th>
+              <th> More Details</th>
            </motion.tr>         
           )
   }
@@ -200,10 +201,17 @@ function MainTable(props) {
           initial={{y: -10}}
           animate={{y:0}}
           key={item.sno }>
-          <td colSpan="3" >{item.purchaseDetailsId || "N/A"}</td> 
+          <td colSpan="2" >{item.purchaseDetailsId || "N/A"}</td> 
           <td colSpan="2">{item.transactionId  || "N/A" }</td>
           <td colSpan="2">{item.transactionType || "N/A"}</td>
           <td colSpan="2">{item.companyId || "N/A"}</td>
+          <td>
+          <button 
+           className = "btn "   
+           onClick = {() => {DisplayPurchaseDetails(item.id);}}> 
+          {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
+          </button>
+          </td>
           </motion.tr>     
         )
       
