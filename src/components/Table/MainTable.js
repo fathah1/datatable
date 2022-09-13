@@ -9,9 +9,15 @@ import {motion, AnimatePresence} from 'framer-motion';
 function MainTable(props) {
 
     const [user, setUser] = useState([]); 
+
     const [innerTableVisibility,setinnerTableVisibility] = useState(false);
+    const [innerInnerTableVisibility,setInnerInnerTableVisibility] = useState(false);
+
     const [currentItemId,SetcurrentItemId] = useState(0);
     const [currentPurchaseDetails, setCurrentPurchaseDetails] = useState([]); 
+    const [currentPurchaseDetailsId, setCurrentPurchaseDetailsId] = useState(0);
+
+
     const sampleData = require("../Resources/samples.json");
     const [filteredData,setFilteredData] = useState([]);
 
@@ -111,14 +117,29 @@ function MainTable(props) {
     setCurrentPurchaseDetails(findObj(value)[0].purchaseDetails);
     console.log("purchase Details in dpd", currentPurchaseDetails);
 
-    RenderPurchaseDetailsHeader();
-    RenderPurchaseDetailsData();
 
     if(innerTableVisibility){
       setinnerTableVisibility(false)
     }else{
       setinnerTableVisibility(true)
     }
+
+   
+   
+  })
+
+
+   const DisplayExtraDetails = ((value)=>{
+
+    setCurrentPurchaseDetailsId(value);
+
+    if(innerInnerTableVisibility){
+      setInnerInnerTableVisibility(false)
+    }else{
+      setInnerInnerTableVisibility(true)
+    }
+
+    console.log("inner inner data ", innerInnerTableVisibility);
 
    
    
@@ -159,6 +180,8 @@ function MainTable(props) {
                </motion.td> : "" }   
                {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
                {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
+               {innerInnerTableVisibility && currentPurchaseDetailsId === currentPurchaseDetails.purchaseDetailsId ? <RenderExtraDetails/> : console.log("purchaseDetails" , currentPurchaseDetails, currentPurchaseDetailsId) }
+             
         
           
               </tbody>
@@ -208,7 +231,7 @@ function MainTable(props) {
           <td>
           <button 
            className = "btn "   
-           onClick = {() => {DisplayPurchaseDetails(item.id);}}> 
+           onClick = {() => {DisplayExtraDetails(item.purchaseDetailsId);}}> 
           {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
           </button>
           </td>
@@ -217,6 +240,34 @@ function MainTable(props) {
       
     }
     )
+}
+
+
+const RenderExtraDetails = () =>{
+    
+   
+  return currentPurchaseDetails.map(item =>{
+      return(   
+        <motion.tr
+        initial={{y: -10}}
+        animate={{y:0}}
+        key={item.sno }>
+        <td colSpan="2" >{item.purchaseDetailsId || "N/A"}</td> 
+        <td colSpan="2">{item.transactionId  || "N/A" }</td>
+        <td colSpan="2">{item.transactionType || "N/A"}</td>
+        <td colSpan="2">{item.companyId || "N/A"}</td>
+        <td>
+        <button 
+         className = "btn "   
+         onClick = {() => {DisplayExtraDetails(item.purchaseDetailsId);}}> 
+        {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
+        </button>
+        </td>
+        </motion.tr>     
+      )
+    
+  }
+  )
 }
 
 

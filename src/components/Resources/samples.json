@@ -816,7 +816,7 @@
         "updatedDate": "0001-01-01T00:00:00Z",
         "purchaseDetails": [
             {
-                "id": null,
+                "id": "91",
                 "purchaseDetailsId": "0282881d-c4f7-4f11-b980-3c09214f3f23",
                 "purchaseId": null,
                 "sno": 0,
@@ -851,7 +851,7 @@
                 "updateDate": "0001-01-01T00:00:00Z"
             },
             {
-                "id": null,
+                "id": "92",
                 "purchaseDetailsId": "ae7ab7a1-5428-48e9-91fd-7d5d65ad90ef",
                 "purchaseId": null,
                 "sno": 0,
