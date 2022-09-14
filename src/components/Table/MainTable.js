@@ -172,6 +172,7 @@ function MainTable(props) {
             return(
 
               <tbody className="table">
+
               <tr key={item.id} >
                 <td>{item.purchaseNo || "N/A"}</td> 
                 <td>{item.purchaseDate.slice(0, 10).split("-").reverse().join("-") || "N/A"}</td>
@@ -191,18 +192,28 @@ function MainTable(props) {
                 </td>
               </tr>         
 
-                
-               {innerTableVisibility && item.id === currentItemId ? <motion.td colSpan="9" 
-               initial={{y: -10}}
-               animate={{y:0}}
-               >
-               <h6 className="purchaseHeading">Purchase Details</h6>
-               </motion.td> : "" }   
-               {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
-               {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
-               
-               
-             
+              {
+              innerTableVisibility && item.id === currentItemId ?
+
+              <tr>  
+              <td colspan="100%">
+                <div className="w-100">
+               <table  className="purchaseTable">
+               <tr>
+                <td colspan="100%" className="purchaseTableElems">
+               {<motion.h6  initial={{y: -10}} animate={{y:0}} className="purchaseHeading bg-success">Purchase Details</motion.h6>}   
+               </td>
+               </tr>
+               {<RenderPurchaseDetailsHeader className="purchaseTableElems"/>}   
+               {<RenderPurchaseDetailsData className="purchaseTableElems"/>}   
+              </table>
+              </div>
+
+              </td>
+
+              </tr>:   ""
+
+              }
         
           
               </tbody>
@@ -232,15 +243,12 @@ function MainTable(props) {
     const RenderPurchaseDetailsHeader = () =>{
      
           return(   
-            <motion.tr
-            colSpan="9"
-            initial={{y: -10}}
-            animate={{y:0}}>
+            <motion.tr  initial={{y: -10}} animate={{y:0}}>
               <th colSpan="2" scope="col">Serial No</th>
               <th colSpan="2" scope="col">Transaction ID</th>
               <th colSpan="2" scope="col">Transaction Type</th>
               <th colSpan="2" scope="col" >Company ID</th>
-              <th> More Details</th>
+              <th colSpan="1" scope="col"> More Details</th>
            </motion.tr>         
           )
   }
@@ -248,29 +256,16 @@ function MainTable(props) {
   const RenderExtraDetails = () =>{
     
         return(   
-          <motion.tr
-          initial={{y: -10}}
-          animate={{y:0}}
-           >
-          <div className="bg-success"> <h6>this</h6></div>
+          <motion.tr initial={{y: -10}} animate={{y:0}}>
+          <td className="bg-success"> <h6>this</h6></td>
           </motion.tr>     
-        )
-      
-    
-    
+        )    
   }
-  
-  
-
-
-
   const RenderPurchaseDetailsData = () =>{
     
    
     return currentPurchaseDetails.map(item =>{
         return(   
-
-          <tbody colspan="9">
           <motion.tr
           initial={{y: -10}}
           animate={{y:0}}
@@ -279,19 +274,18 @@ function MainTable(props) {
           <td colSpan="2">{item.transactionId  || "N/A" }</td>
           <td colSpan="2">{item.transactionType || "N/A"}</td>
           <td colSpan="2">{item.companyId || "N/A"}</td>
-          <td>
+          <td colspan="1">
           <button 
            className = "btn "   
            onClick = {() => {DisplayExtraDetails(item.purchaseDetailsId);}}> 
           {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
           </button>
           </td>
-         
-          </motion.tr>   
+        
+          {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <RenderExtraDetails/> :"" }
 
-           {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <RenderExtraDetails/> :"" }  
-
-          </tbody>
+        
+          </motion.tr>     
         )
       
     }
@@ -304,7 +298,9 @@ function MainTable(props) {
 
   return (
     <div className="MainTable">
-       <table className="table">
+
+      
+       <table className="table" >
 
   <thead>
 

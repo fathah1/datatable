@@ -22,3 +22,17 @@ th{
 tr{
     text-align: center;
 }
+
+.purchaseTable{
+    display: table;
+    width: 100%;
+    border-width: 5px;
+    border-color: black;
+ 
+}
+
+.purchaseTableElems{
+    border-width: 20px;
+}
+
+
