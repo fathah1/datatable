@@ -15,7 +15,12 @@ function MainTable(props) {
 
     const [currentItemId,SetcurrentItemId] = useState(0);
     const [currentPurchaseDetails, setCurrentPurchaseDetails] = useState([]); 
+
     const [currentPurchaseDetailsId, setCurrentPurchaseDetailsId] = useState(0);
+    const [selectedPurchaseDetailsIndex,setselectedPurchaseDetailsIndex] = useState(0);
+
+    const [warehouseDetails,setWareHouseDetails] = useState([]);
+    const [serialNoDetails,setSerialNoDetails] = useState([]); 
 
 
     const sampleData = require("../Resources/samples.json");
@@ -82,6 +87,8 @@ function MainTable(props) {
   };
 
 
+   
+
 
   const VendorFilterHandler = () => {
     const vendor = props.vendorFilter;
@@ -109,44 +116,57 @@ function MainTable(props) {
 
 
 
-
+//Displaying functions
   const DisplayPurchaseDetails = ((value)=>{
-
     SetcurrentItemId(value);
-    
-    setCurrentPurchaseDetails(findObj(value)[0].purchaseDetails);
+    let obj = findObj(value)[0]
+    setCurrentPurchaseDetails(obj.purchaseDetails);
     console.log("purchase Details in dpd", currentPurchaseDetails);
+      //change to extra details function after knowing abouut new api 
+      setWareHouseDetails(obj.wareHouseStockDetails)
+      setSerialNoDetails(obj.serialNoDetails) 
+      console.log("warehouseDetails", warehouseDetails);
+      console.log("serialNo details", serialNoDetails)
 
 
     if(innerTableVisibility){
       setinnerTableVisibility(false)
     }else{
       setinnerTableVisibility(true)
-    }
+    }   
 
-   
-   
+  
+
   })
 
-
    const DisplayExtraDetails = ((value)=>{
-
     setCurrentPurchaseDetailsId(value);
+
+    console.log("current purchase details",currentPurchaseDetails)
+    console.log("value", value)
+    
+    const index = currentPurchaseDetails.map(object => object.purchaseDetailsId).indexOf(value);
+    setselectedPurchaseDetailsIndex(index);
+    console.log("index",index)
+
+
 
     if(innerInnerTableVisibility){
       setInnerInnerTableVisibility(false)
     }else{
       setInnerInnerTableVisibility(true)
     }
+    console.log("inner inner data ", innerInnerTableVisibility);   
 
-    console.log("inner inner data ", innerInnerTableVisibility);
 
-   
-   
+
+
   })
 
    
 
+
+//renderingFunctions
     const renderTableRows = () =>{
         return filteredData.map(item =>{
             return(
@@ -180,7 +200,8 @@ function MainTable(props) {
                </motion.td> : "" }   
                {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsHeader/> : "" }   
                {innerTableVisibility && item.id === currentItemId ? <RenderPurchaseDetailsData/> : "" }   
-               {innerInnerTableVisibility && currentPurchaseDetailsId === currentPurchaseDetails.purchaseDetailsId ? <RenderExtraDetails/> : console.log("purchaseDetails" , currentPurchaseDetails, currentPurchaseDetailsId) }
+               
+               
              
         
           
@@ -191,6 +212,7 @@ function MainTable(props) {
         })
     }
 
+//finding
     function findObj(value) {
 
       let obj = user.filter(item => item.id === value);
@@ -198,6 +220,14 @@ function MainTable(props) {
       setCurrentPurchaseDetails(obj.purchaseDetails);
       return  obj;
     }
+
+    // function findcurrentDetailsObj(value) {
+
+    //   let obj = currentPurchaseDetails.filter(item => item.id === value);
+    //   console.log("found currenct detials Obj ", obj);
+    //   setCurrentlySelectedPurchaseDetails(obj.purchaseDetails);
+    //   return  obj;
+    // }
 
     const RenderPurchaseDetailsHeader = () =>{
      
@@ -215,15 +245,36 @@ function MainTable(props) {
           )
   }
 
+  const RenderExtraDetails = () =>{
+    
+        return(   
+          <motion.tr
+          initial={{y: -10}}
+          animate={{y:0}}
+           >
+          <div className="bg-success"> <h6>this</h6></div>
+          </motion.tr>     
+        )
+      
+    
+    
+  }
+  
+  
+
+
+
   const RenderPurchaseDetailsData = () =>{
     
    
     return currentPurchaseDetails.map(item =>{
         return(   
+
+          <tbody colspan="9">
           <motion.tr
           initial={{y: -10}}
           animate={{y:0}}
-          key={item.sno }>
+          key={item.purchaseDetailsId }>
           <td colSpan="2" >{item.purchaseDetailsId || "N/A"}</td> 
           <td colSpan="2">{item.transactionId  || "N/A" }</td>
           <td colSpan="2">{item.transactionType || "N/A"}</td>
@@ -232,43 +283,21 @@ function MainTable(props) {
           <button 
            className = "btn "   
            onClick = {() => {DisplayExtraDetails(item.purchaseDetailsId);}}> 
-          {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
+          {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
           </button>
           </td>
-          </motion.tr>     
+         
+          </motion.tr>   
+
+           {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <RenderExtraDetails/> :"" }  
+
+          </tbody>
         )
       
     }
     )
 }
 
-
-const RenderExtraDetails = () =>{
-    
-   
-  return currentPurchaseDetails.map(item =>{
-      return(   
-        <motion.tr
-        initial={{y: -10}}
-        animate={{y:0}}
-        key={item.sno }>
-        <td colSpan="2" >{item.purchaseDetailsId || "N/A"}</td> 
-        <td colSpan="2">{item.transactionId  || "N/A" }</td>
-        <td colSpan="2">{item.transactionType || "N/A"}</td>
-        <td colSpan="2">{item.companyId || "N/A"}</td>
-        <td>
-        <button 
-         className = "btn "   
-         onClick = {() => {DisplayExtraDetails(item.purchaseDetailsId);}}> 
-        {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
-        </button>
-        </td>
-        </motion.tr>     
-      )
-    
-  }
-  )
-}
 
 
 
