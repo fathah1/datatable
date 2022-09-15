@@ -31,8 +31,27 @@ tr{
  
 }
 
-.purchaseTableElems{
+/* .purchaseTableElems{
     border-width: 20px;
+    background-color: blue;
+} */
+
+.PurchaseDetailsDataDiv{
+    display: contents;
 }
 
+.innerInnerTables{
+    margin:2rem
+}
 
+.innerInnerTablesDiv{
+   display: grid;
+}
+
+.Purchaseheading{
+    height: 4rem;
+}
+
+.purchaseDetailsTD{
+    margin: 10px;
+}

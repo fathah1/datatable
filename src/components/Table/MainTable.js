@@ -182,39 +182,24 @@ function MainTable(props) {
                 <td>{item.purchaseTotal || "N/A"}</td>
                 <td>{item.balanceAmount || "N/A"}</td>
                 <td>{item.status || "N/A" }</td>
-                <td className=""> 
-                  <button 
-                  className = "btn "   
-                  onClick = {() => {DisplayPurchaseDetails(item.id);}} 
-                  > 
-                  {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
-                    </button>
+                <td className=""> <button  className = "btn " onClick = {() => {DisplayPurchaseDetails(item.id);}}> 
+                                     {innerTableVisibility && item.id === currentItemId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
+                                 </button>
                 </td>
               </tr>         
 
-              {
-              innerTableVisibility && item.id === currentItemId ?
-
+              { innerTableVisibility && item.id === currentItemId ?
               <tr>  
               <td colspan="100%">
-                <div className="w-100">
-               <table  className="purchaseTable">
                <tr>
-                <td colspan="100%" className="purchaseTableElems">
-               {<motion.h6  initial={{y: -10}} animate={{y:0}} className="purchaseHeading bg-success">Purchase Details</motion.h6>}   
-               </td>
+               {<motion.h6  initial={{y: -10}} animate={{y:0}} className="purchaseHeading w-100">Purchase Details</motion.h6>}   
                </tr>
+
                {<RenderPurchaseDetailsHeader className="purchaseTableElems"/>}   
-               {<RenderPurchaseDetailsData className="purchaseTableElems"/>}   
-              </table>
-              </div>
-
+                  
               </td>
+              </tr>:   ""}
 
-              </tr>:   ""
-
-              }
-        
           
               </tbody>
 
@@ -232,17 +217,11 @@ function MainTable(props) {
       return  obj;
     }
 
-    // function findcurrentDetailsObj(value) {
-
-    //   let obj = currentPurchaseDetails.filter(item => item.id === value);
-    //   console.log("found currenct detials Obj ", obj);
-    //   setCurrentlySelectedPurchaseDetails(obj.purchaseDetails);
-    //   return  obj;
-    // }
-
     const RenderPurchaseDetailsHeader = () =>{
      
           return(   
+            <table className="purchaseTable">
+            <thead className="bg-success Purchaseheading">
             <motion.tr  initial={{y: -10}} animate={{y:0}}>
               <th colSpan="2" scope="col">Serial No</th>
               <th colSpan="2" scope="col">Transaction ID</th>
@@ -250,48 +229,131 @@ function MainTable(props) {
               <th colSpan="2" scope="col" >Company ID</th>
               <th colSpan="1" scope="col"> More Details</th>
            </motion.tr>         
+           </thead>
+
+            <tbody>
+           {<RenderPurchaseDetailsData className="purchaseTableElems"/>}   
+
+           </tbody>
+
+
+
+           </table>
           )
   }
 
-  const RenderExtraDetails = () =>{
-    
-        return(   
-          <motion.tr initial={{y: -10}} animate={{y:0}}>
-          <td className="bg-success"> <h6>this</h6></td>
-          </motion.tr>     
-        )    
-  }
-  const RenderPurchaseDetailsData = () =>{
-    
-   
+  const RenderPurchaseDetailsData = () =>{   
     return currentPurchaseDetails.map(item =>{
         return(   
+          <div className="PurchaseDetailsDataDiv">
           <motion.tr
           initial={{y: -10}}
           animate={{y:0}}
           key={item.purchaseDetailsId }>
-          <td colSpan="2" >{item.purchaseDetailsId || "N/A"}</td> 
-          <td colSpan="2">{item.transactionId  || "N/A" }</td>
-          <td colSpan="2">{item.transactionType || "N/A"}</td>
-          <td colSpan="2">{item.companyId || "N/A"}</td>
-          <td colspan="1">
-          <button 
-           className = "btn "   
+
+
+          <td className="purchaseDetailsTD" colSpan="2" >{item.purchaseDetailsId || "N/A"}</td> 
+          <td className="purchaseDetailsTD" colSpan="2">{item.transactionId  || "N/A" }</td>
+          <td className="purchaseDetailsTD" colSpan="2">{item.transactionType || "N/A"}</td>
+          <td className="purchaseDetailsTD" colSpan="2">{item.companyId || "N/A"}</td>
+          <td className="purchaseDetailsTD" colspan="1">
+          <button  
+           className = "btn purchaseDetailsTD "   
            onClick = {() => {DisplayExtraDetails(item.purchaseDetailsId);}}> 
           {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <IoIosArrowDropup/>  : <IoIosArrowDropdown  /> }
           </button>
-          </td>
-        
-          {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <RenderExtraDetails/> :"" }
+          </td> 
+          </motion.tr>  
 
-        
-          </motion.tr>     
+          
+          <tr>
+            <td colspan="100%">
+
+          {innerInnerTableVisibility && item.purchaseDetailsId === currentPurchaseDetailsId ? <RenderExtraDetails/>  : "" }
+
+            </td>
+
+          </tr>
+          </div>
+
         )
       
     }
     )
 }
 
+
+const RenderExtraDetails = () =>{
+    
+  return(   
+    <motion.td colspan="9" initial={{y: -10}} animate={{y:0}} className="innerInnerTablesDiv">
+
+      <motion.h7  initial={{y: -10}} animate={{y:0}} className="purchaseHeading w-100">Serial Number Details</motion.h7>
+      <table border="2" border-color="black" className="innerInnerTables">
+      
+        <thead className="bg-info">
+          <th>Serial No</th>
+          <th>Transaction ID</th>
+          <th>Transaction Type</th>
+          <th>Company ID</th>
+        </thead>
+
+        <RenderSerialNoDetailsData/>
+
+      </table>
+
+ 
+      <motion.h7  initial={{y: -10}} animate={{y:0}} className="purchaseHeading w-100">Ware-House Details</motion.h7>
+      <table border="2" border-color="black" className="innerInnerTables">
+      
+        <thead className="bg-info">
+          <th>WareHouse Name</th>
+          <th>Qty</th>
+          <th>WareHouse ID</th>
+          <th>Location</th>
+        </thead>
+
+        <RenderWareHouseDetailsData/>
+
+      </table>
+
+     
+    </motion.td>     
+  )    
+}
+
+const RenderSerialNoDetailsData = () =>{   
+  return serialNoDetails.map(item =>{
+      return(   
+        <tbody >
+        <motion.tr initial={{y: -10}} animate={{y:0}}key={item.purchaseDetailsId }>
+        <td>{item.serialNo || "N/A"}</td> 
+        <td>{item.transactionId  || "N/A" }</td>
+        <td>{item.transactionType|| "N/A"}</td>
+        <td>{item.companyId|| "N/A"}</td>
+        </motion.tr>  
+        </tbody>
+      )
+  }
+  )
+}
+
+
+const RenderWareHouseDetailsData = () =>{   
+  return warehouseDetails.map(item =>{
+      return(   
+        <tbody >
+        <motion.tr initial={{y: -10}} animate={{y:0}}key={item.purchaseDetailsId }>
+        <td>{item.warehouseName || "N/A"}</td> 
+        <td>{item.qty  || "N/A" }</td>
+        <td>{item.warehouseId || "N/A"}</td>
+        <td>{item.location || "N/A"}</td>
+        </motion.tr>  
+        </tbody>
+      )
+  }
+  )
+}
 
 
 
