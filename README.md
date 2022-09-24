@@ -8,6 +8,7 @@
 * css grid use for layout of the website
 * transform in css
 * making searches and filtering in react 
+* could use https://lottiefiles.com/ for animations
 
 ## Things to fix
 * using multiple filters at once 
