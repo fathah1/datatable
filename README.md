@@ -21,6 +21,10 @@
 * use __react fragments__ to create a single component from which others can be called without returning it to avoid error
 * using material ui tables for easy tables that are collapsable https://therichpost.com/reactjs-material-table-with-expandable-collapsible-rows-working/
 * using redux toolkit and making stores which can make states available for all components and called from app component
+* what strict mode and context does in react
+* data fetching inreact using suspense and fallbacks inside suspense for loading animations 
+* routing using react router,switch etc
+ 
 
 
 
