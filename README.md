@@ -17,3 +17,10 @@
 * fix objects with ledgerID not rendring first and later rendering or refresh or adding deleting filter
 
 
+## new concepts learned while looking at the main teams code
+* use __react fragments__ to create a single component from which others can be called without returning it to avoid error
+* using material ui tables for easy tables that are collapsable
+* using redux toolkit and making stores which can make states available for all components and called from app component
+
+
+
